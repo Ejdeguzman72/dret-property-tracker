@@ -1,0 +1,48 @@
+server:
+    port: 8080
+
+eureka:
+    client:
+        serviceUrl:
+            defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+    instance:
+        preferIpAddress: true
+
+spring:
+    application:
+        name: dret-property-tracker
+    datasource:
+        url: jdbc:postgresql://localhost:5432/postgres
+        username: postgres
+        password: password
+        tomcat:
+            initial-size: 5
+            max-wait: 25000
+            max-active: 5
+            max-idle: 5
+            min-idle: 1
+            default-auto-commit: true
+    jpa:
+        show-sql: false
+        generate-ddl: true
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+                jdbc:
+                    lob:
+                        non_contextual_creation: true
+        hibernate:
+            ddl-auto: update
+        naming:
+            physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+spring.jackson:
+    serialization:
+        fail-on-empty-beans: false
+
+logging:
+    pattern:
+        console: '%d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg%n'
+
+spring.main:
+    allow-circular-references: true
